@@ -1,0 +1,28 @@
+# System
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+
+# Temporary files
+*.tmp
+*.log
+
+# PHP / XAMPP
+php_errorlog
+
+# Environment / configuration
+.env
+
+# Uploaded files
+uploads/*
+!uploads/product/
+!uploads/product/**
+
+# Database
+*.sqlite
+*.sqlite3
+
+#local database configuration
+config/database.php

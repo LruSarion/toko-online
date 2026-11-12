@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /config/
+Disallow: /includes/
+Disallow: /public/cart.php
+Disallow: /public/checkout.php
+Disallow: /public/profil.php
+Disallow: /public/riwayat.php
+Disallow: /public/detail_pesanan.php
+Disallow: /public/chat.php
+
+Sitemap: https://tokkokulaku.rf.gd/public/sitemap.php
