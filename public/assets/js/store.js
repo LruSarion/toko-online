@@ -91,4 +91,105 @@
     ship.forEach(function (r) { r.addEventListener('change', upd); });
     upd();
   }
+
+  // Custom Dropdown Select: Mengganti menu OS popup bawaan menjadi menu bertema elegan
+  var closeAllCSelects = function () {
+    $$('.cselect.is-open').forEach(function (w) {
+      w.classList.remove('is-open');
+      var b = $('.cselect-btn', w);
+      if (b) b.setAttribute('aria-expanded', 'false');
+    });
+  };
+
+  $$('select.select').forEach(function (sel) {
+    if (sel.getAttribute('data-cselect-init') || sel.multiple) return;
+    sel.setAttribute('data-cselect-init', '1');
+
+    var wrap = document.createElement('div');
+    wrap.className = 'cselect';
+    if (sel.closest('.toolbar')) wrap.classList.add('cselect-toolbar');
+    if (sel.closest('.bar-tools')) wrap.classList.add('cselect-admin');
+    if (sel.closest('.field')) wrap.classList.add('cselect-block');
+    if (sel.disabled) wrap.classList.add('is-disabled');
+
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'cselect-btn';
+    btn.setAttribute('aria-haspopup', 'listbox');
+    btn.setAttribute('aria-expanded', 'false');
+
+    var selOpt = sel.options[sel.selectedIndex] || sel.options[0];
+    var textSpan = document.createElement('span');
+    textSpan.className = 'cselect-text';
+    textSpan.textContent = selOpt ? selOpt.textContent : '';
+
+    var arrow = document.createElement('span');
+    arrow.className = 'cselect-arrow';
+    arrow.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>';
+
+    btn.appendChild(textSpan);
+    btn.appendChild(arrow);
+    wrap.appendChild(btn);
+
+    var menu = document.createElement('div');
+    menu.className = 'cselect-menu';
+    menu.setAttribute('role', 'listbox');
+
+    Array.prototype.slice.call(sel.options).forEach(function (opt) {
+      var item = document.createElement('div');
+      item.className = 'cselect-opt' + (opt.selected ? ' is-selected' : '');
+      item.setAttribute('role', 'option');
+      item.setAttribute('data-value', opt.value);
+      item.textContent = opt.textContent;
+
+      item.addEventListener('click', function (e) {
+        e.stopPropagation();
+        if (sel.value !== opt.value) {
+          sel.value = opt.value;
+          textSpan.textContent = opt.textContent;
+          $$('.cselect-opt', menu).forEach(function (el) { el.classList.remove('is-selected'); });
+          item.classList.add('is-selected');
+          sel.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+        closeAllCSelects();
+      });
+
+      menu.appendChild(item);
+    });
+
+    wrap.appendChild(menu);
+
+    sel.parentNode.insertBefore(wrap, sel);
+    sel.classList.add('cselect-native-hidden');
+
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var wasOpen = wrap.classList.contains('is-open');
+      closeAllCSelects();
+      if (!wasOpen && !sel.disabled) {
+        wrap.classList.add('is-open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+
+    sel.addEventListener('change', function () {
+      var curr = sel.options[sel.selectedIndex];
+      if (curr) {
+        textSpan.textContent = curr.textContent;
+        $$('.cselect-opt', menu).forEach(function (el) {
+          el.classList.toggle('is-selected', el.getAttribute('data-value') === curr.value);
+        });
+      }
+    });
+  });
+
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest('.cselect')) {
+      closeAllCSelects();
+    }
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeAllCSelects();
+  });
 })();

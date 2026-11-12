@@ -34,7 +34,8 @@ body.adm{background:#f3f2ee;display:grid;grid-template-columns:244px minmax(0,1f
 .thumb img{width:100%;height:100%;object-fit:contain;padding:3px;mix-blend-mode:multiply}
 .bar-tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:16px}
 .bar-tools form{display:flex;gap:8px;flex-wrap:wrap;flex:1}
-.bar-tools .input,.bar-tools .select{width:auto;min-width:160px;padding:9px 14px}
+.bar-tools .input{width:auto;min-width:160px;padding:9px 14px}
+.bar-tools .select{width:auto;min-width:160px;padding:9px 38px 9px 14px}
 .bar-tools .input.grow{flex:1;min-width:200px}
 .acts{display:flex;gap:6px;justify-content:flex-end;flex-wrap:wrap}
 .btn-icon{padding:8px 11px}

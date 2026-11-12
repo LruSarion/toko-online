@@ -5,12 +5,12 @@
 return [
     'nama'     => 'Tokkoku Laku',
     'tagline'  => 'Gadget & elektronik pilihan',
-    'url'      => 'https://tokkokulaku.rf.gd',     // tanpa "/" di akhir; dipakai untuk canonical, OG & sitemap
+    'url'      => 'http://localhost/toko-online',     // tanpa "/" di akhir; dipakai untuk canonical, OG & sitemap
     'whatsapp' => '6281933485477',                 // format internasional, tanpa tanda +
     'email'    => '',                              // opsional, tampil di footer
     'alamat'   => '',                              // opsional, tampil di footer
     'promo_bar' => 'Butuh bantuan memilih produk? Tanya kami lewat WhatsApp.',   // kosongkan untuk menyembunyikan
-    'google_verification' => 'ohWKGcP_1kI6XOn5-zXnJbMv_dfOUY0pmchwbOAJCqA',      // dari kode lama; kosongkan jika tidak dipakai
+    'google_verification' => '',      // dari kode lama; kosongkan jika tidak dipakai
 
     'kategori'    => ['Smartphone', 'Laptop', 'Smartwatch', 'TV / Monitor', 'Komputer / PC', 'Aksesoris', 'Gaming', 'Lainnya'],
     'per_halaman' => 12,    // produk per halaman di toko
@@ -36,5 +36,5 @@ return [
     // Contoh isi: ['bank' => 'BCA', 'nomor' => '1234567890', 'nama' => 'Nama Pemilik'],
     'rekening' => [],
 
-    'debug' => false,   // true hanya saat pengembangan lokal
+    'debug' => true,   // true hanya saat pengembangan lokal
 ];
